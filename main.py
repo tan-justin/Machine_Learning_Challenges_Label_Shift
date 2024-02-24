@@ -82,19 +82,19 @@ def main():
 
     max_row_label_length = max(len(label) for label in keys_order)
 
-    print("{:<{width}}".format("", width=max_row_label_length), end="")
-    print("{:<12}".format("val"), end="")
+    print("{:<{width}}".format("", width = max_row_label_length), end = "")
+    print("{:<12}".format("val"), end = "")
     for col_label in cols_order[1:]:
-        print("{:<13}".format(col_label), end="")
+        print("{:<13}".format(col_label), end = "")
     print()
 
     for i, row_label in enumerate(keys_order):
-        print(f"{row_label: <{max_row_label_length}}", end="")
+        print(f"{row_label: <{max_row_label_length}}", end = "")
         for j in range(len(cols_order)):
             if isinstance(table[i][j], tuple):
-                print(f"({table[i][j][0]:.2f}, {table[i][j][1]:.2f})", end=" "*(13 - len(str(table[i][j]))))
+                print(f"({table[i][j][0]:.2f}, {table[i][j][1]:.2f})", end = " "*(13 - len(str(table[i][j]))))
             else:
-                print(f"{table[i][j]:.2f} ", end=" "*(13 - len(str(table[i][j]))))
+                print(f"{table[i][j]:.2f} ", end = " "*(13 - len(str(table[i][j]))))
         print()
 
     key_order = ['rf', '3nn', '9nn', 'gpc']
@@ -109,15 +109,15 @@ def main():
     rounded_data = [[[[round(num, 2) for num in inner_array] if isinstance(inner_array, np.ndarray) else round(inner_array, 2) 
                       for inner_array in sublist] for sublist in sublist2] for sublist2 in weights_table]
     
-    print(" " * 7, end="")
+    print(" " * 7, end = "")
     for col_label in col_labels:
-        print(f"{col_label: <25}", end="")
+        print(f"{col_label: <25}", end = "")
     print()
 
     for i, row_label in enumerate(key_order):
-        print(f"{row_label: <7}", end="")
+        print(f"{row_label: <7}", end = "")
         for j in range(len(col_labels)):
-            print(f"{rounded_data[i][j]} ", end="")
+            print(f"{rounded_data[i][j]} ", end = "")
         print()
 
 
