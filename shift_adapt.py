@@ -19,15 +19,13 @@ class ShiftAdapt:
         self.val_y = val['Severity']
         self.val_X = val.drop(columns = ['Severity'])
 
-        #self.test1 = test1
+
         self.test1_y = test1['Severity']
         self.test1_X = test1.drop(columns = ['Severity'])
 
-        #self.test2 = test2
         self.test2_y = test2['Severity']
         self.test2_X = test2.drop(columns = ['Severity'])
 
-        #self.test3 = test3
         self.test3_y = test3['Severity']
         self.test3_X = test3.drop(columns = ['Severity'])
 
@@ -60,7 +58,7 @@ class ShiftAdapt:
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
         print('valid')
-        #print(accuracy)
+
         return accuracy
     
     def test1(self):
@@ -71,7 +69,7 @@ class ShiftAdapt:
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
         print('test1')
-        #print(accuracy)
+
         return accuracy
     
     def test2(self):
@@ -82,7 +80,7 @@ class ShiftAdapt:
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
         print('test2')
-        #print(accuracy)
+        
         return accuracy
 
     def test3(self):
@@ -93,7 +91,7 @@ class ShiftAdapt:
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
         print('test3')
-        #print(accuracy)
+
         return accuracy
 
     def label_shift_1(self):
@@ -106,7 +104,6 @@ class ShiftAdapt:
         accuracy = {}
         probability = {}
         class_labels = val_y.unique()
-        #print(class_labels)
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
@@ -123,13 +120,8 @@ class ShiftAdapt:
             probability[name] = new_test_prob
 
         print('weights1')
-        #print(weights)
-        
         print('accuracy1')
-        #print(accuracy)
-
         print('probability1')
-        #print(probability)
 
         return weights, accuracy, probability
     
@@ -143,7 +135,6 @@ class ShiftAdapt:
         accuracy = {}
         probability = {}
         class_labels = val_y.unique()
-        #print(class_labels)
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
@@ -160,13 +151,8 @@ class ShiftAdapt:
             probability[name] = new_test_prob
 
         print('weights2')
-        #print(weights)
-        
         print('accuracy2')
-        #print(accuracy)
-
         print('probability2')
-        #print(probability)
 
         return weights, accuracy, probability
     
@@ -180,7 +166,6 @@ class ShiftAdapt:
         accuracy = {}
         probability = {}
         class_labels = val_y.unique()
-        #print(class_labels)
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
@@ -197,13 +182,8 @@ class ShiftAdapt:
             probability[name] = new_test_prob
 
         print('weights3')
-        #print(weights)
-        
         print('accuracy3')
-        #print(accuracy)
-
         print('probability3')
-        #print(probability)
-
+   
         return weights, accuracy, probability
 

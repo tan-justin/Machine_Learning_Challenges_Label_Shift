@@ -120,7 +120,5 @@ def main():
             print(f"{rounded_data[i][j]} ", end = "")
         print()
 
-
-
 if __name__ =="__main__":
     main()
