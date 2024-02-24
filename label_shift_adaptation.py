@@ -29,7 +29,7 @@ from scipy.stats import chi2_contingency, fisher_exact
 # with test set predictions to compute shift adaptation weights.
 #
 # Arguments:
-# - val_labels: list/array of validation set laels
+# - val_labels: list/array of validation set labels
 # - val_preds: list/array of validation set predictions
 # - test_preds: list/array of test set predictions
 # 
