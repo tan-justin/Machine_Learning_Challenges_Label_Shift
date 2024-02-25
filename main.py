@@ -1,6 +1,24 @@
+'''
+Name: Justin Tan
+Assignment: Adapt to Change
+Date: Feb 25 2024
+File: main.py
+'''
 import numpy as np
 import pandas as pd
 from shift_adapt import ShiftAdapt
+
+'''
+Type: Function
+Name: csv_to_df
+Purpose: Convert data in csv format to dataframe format
+Parameters: csv file path
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: main
+Purpose: Driver code, data preprocessing, table printing
+Parameters: None
+'''
 
 def csv_to_df(file_path):
     return pd.read_csv(file_path)

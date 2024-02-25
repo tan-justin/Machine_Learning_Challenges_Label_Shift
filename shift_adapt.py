@@ -1,3 +1,10 @@
+'''
+Name: Justin Tan
+Assignment: Adapt to Change
+Date: Feb 25 2024
+File: shift_adapt.py
+'''
+
 import numpy as np
 import pandas as pd
 from sklearn.gaussian_process import GaussianProcessClassifier
@@ -10,6 +17,70 @@ from label_shift_adaptation import analyze_val_data, update_probs
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import os
+
+'''
+Type: Class
+Name: ShiftAdapt
+Purpose: Self-created "library" to contain methods for calculating accuracies and shifting labels
+Parameters: None
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: __init__
+Purpose: Preprocessing data and preparation of models
+Parameters: train set, validation set, test set 1, test set 2, test set 3 (dataframes)
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: train
+Purpose: Training all 6 models on the training set
+Parameters: train set, random forest classifier, 3nn classifier, 9nn classifier, gaussian classifier, baseline classifier x2
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: valid
+Purpose: Get the accuracy of each classifier's prediction on the validation set, print graphs of truth label vs predicted label distribution
+         for each classifier
+Parameters: valid set, the 6 classifiers
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: test1
+Purpose: Get the accuracy of each classifier's predictions on the test1 set, print graphs of truth label vs predicted label distribution
+         for each classifier
+Paramters: test1 set, the 6 classifiers
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: test2
+Purpose: Get the accuracy of each classifier's predictions on the test2 set, print graphs of truth label vs predicted label distribution
+         for each classifier
+Parameters: test2 set, the 6 classifiers
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: test3
+Purpose: Get the accuracy of each classifier's predictions on the test3 set, print graphs of truth label vs predicted label distribution
+         for each classifier
+Parameters: test3 set, the 6 classifiers
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: label_shift_1
+Purpose: Perform label shift on test1 set and update the predictions. Prints the confusion matrix for each classifier and prints out
+         the weights for each classifier
+Parameters: test1 set, valid set, the classifiers excluding the baseline
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: label_shift_2
+Purpose: Perform label shift on test2 set and update the predictions. Prints the confusion matrix for each classifier and prints out
+         the weights for each classifier
+Parameters: test2 set, valid set, the classifiers excluding the baseline
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: label_shift_3
+Purpose: Perform label shift on test3 set and update the predictions. Prints the confusion matrix for each classifier and prints out
+         the weights for each classifier
+Parameters: test3 set, valid set, the classifiers excluding the baseline
+-----------------------------------------------------------------------------------------------------------------------------------------
+Type: Function
+Name: plot_normalized_true_class_label_distribution_all_datasets
+Purpose: Plot a graph showing the distribution of the truth labels for the valid set, test1 set, test2 set and test3 set
+Paramters: valid set, test1 set, test2 set, test3 set
+'''
 
 class ShiftAdapt:
 
