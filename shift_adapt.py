@@ -121,8 +121,14 @@ class ShiftAdapt:
         self.gpc.fit(X, y)
         self.d_freq.fit(X,y)
         self.strat.fit(X,y)
-
         print('Successfully trained all models')
+
+        feature_names = X.columns.tolist()
+        feat_importance = self.rf.feature_importances_
+        feature_importance_dict = {feature_names[i]: importance for i, importance in enumerate(feat_importance)}
+        sorted_features = sorted(feature_importance_dict.items(), key=lambda x: x[1], reverse=True)
+        for feature, importance in sorted_features:
+            print(f"Feature: {feature}, Importance: {importance}")
 
     def valid(self):
         save_dir = 'valid_graphs'
