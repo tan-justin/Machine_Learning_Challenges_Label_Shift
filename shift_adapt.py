@@ -7,6 +7,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import accuracy_score
 from label_shift_adaptation import analyze_val_data, update_probs
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+import os
 
 class ShiftAdapt:
 
@@ -51,45 +54,136 @@ class ShiftAdapt:
         print('Successfully trained all models')
 
     def valid(self):
+        save_dir = 'valid_graphs'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
         X = self.val_X.copy()
         y = self.val_y.copy()
         accuracy = {}
         for name, clf in self.list_classifiers.items():
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
-        print('valid')
+            cm = confusion_matrix(y, y_pred)
+            total_instances = np.sum(cm)
+            normalized_cm = cm / total_instances
+            fig, ax = plt.subplots(figsize = (10, 6))
+            labels = np.unique(np.concatenate((y, y_pred)))
+            positions = np.arange(len(labels))
+            ax.bar(positions - 0.2, normalized_cm.sum(axis=1), width=0.4, label='True Labels', color='b')
+            ax.bar(positions + 0.2, normalized_cm.sum(axis=0), width=0.4, label='Predicted Labels', color='r')
+            ax.set_xlabel('Class Label')
+            ax.set_ylabel('Normalized Frequency')
+            ax.set_title(f'Normalized True and Predicted Class Label Distribution ({name})')
+            ax.set_xticks(positions)
+            ax.set_xticklabels(labels)
+            ax.legend()
+            plt.tight_layout()
+            filename = f'normalized_class_label_distribution_{name}_valid_set.png'
+            filepath = os.path.join(save_dir, filename)
+            plt.savefig(filepath)
+            plt.close()
 
+        print('valid')
+        
         return accuracy
     
     def test1(self):
+        save_dir = 'test1_graphs'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         X = self.test1_X.copy()
         y = self.test1_y.copy()
         accuracy = {}
         for name, clf in self.list_classifiers.items():
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
+            cm = confusion_matrix(y, y_pred)
+            total_instances = np.sum(cm)
+            normalized_cm = cm / total_instances
+            fig, ax = plt.subplots(figsize = (10, 6))
+            labels = np.unique(np.concatenate((y, y_pred)))
+            positions = np.arange(len(labels))
+            ax.bar(positions - 0.2, normalized_cm.sum(axis=1), width=0.4, label='True Labels', color='b')
+            ax.bar(positions + 0.2, normalized_cm.sum(axis=0), width=0.4, label='Predicted Labels', color='r')
+            ax.set_xlabel('Class Label')
+            ax.set_ylabel('Normalized Frequency')
+            ax.set_title(f'Normalized True and Predicted Class Label Distribution ({name})')
+            ax.set_xticks(positions)
+            ax.set_xticklabels(labels)
+            ax.legend()
+            plt.tight_layout()
+            filename = f'normalized_class_label_distribution_{name}_test1_set.png'
+            filepath = os.path.join(save_dir, filename)
+            plt.savefig(filepath)
+            plt.close()
+
         print('test1')
 
         return accuracy
     
     def test2(self):
+        save_dir = 'test2_graphs'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         X = self.test2_X.copy()
         y = self.test2_y.copy()
         accuracy = {}
         for name, clf in self.list_classifiers.items():
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
+            cm = confusion_matrix(y, y_pred)
+            total_instances = np.sum(cm)
+            normalized_cm = cm / total_instances
+            fig, ax = plt.subplots(figsize = (10, 6))
+            labels = np.unique(np.concatenate((y, y_pred)))
+            positions = np.arange(len(labels))
+            ax.bar(positions - 0.2, normalized_cm.sum(axis=1), width=0.4, label='True Labels', color='b')
+            ax.bar(positions + 0.2, normalized_cm.sum(axis=0), width=0.4, label='Predicted Labels', color='r')
+            ax.set_xlabel('Class Label')
+            ax.set_ylabel('Normalized Frequency')
+            ax.set_title(f'Normalized True and Predicted Class Label Distribution ({name})')
+            ax.set_xticks(positions)
+            ax.set_xticklabels(labels)
+            ax.legend()
+            plt.tight_layout()
+            filename = f'normalized_class_label_distribution_{name}_test2_set.png'
+            filepath = os.path.join(save_dir, filename)
+            plt.savefig(filepath)
+            plt.close()
         print('test2')
         
         return accuracy
 
     def test3(self):
+        save_dir = 'test3_graphs'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
         X = self.test3_X.copy()
         y = self.test3_y.copy()
         accuracy = {}
         for name, clf in self.list_classifiers.items():
             y_pred = clf.predict(X)
             accuracy[name] = round(accuracy_score(y, y_pred),2)
+            cm = confusion_matrix(y, y_pred)
+            total_instances = np.sum(cm)
+            normalized_cm = cm / total_instances
+            fig, ax = plt.subplots(figsize = (10, 6))
+            labels = np.unique(np.concatenate((y, y_pred)))
+            positions = np.arange(len(labels))
+            ax.bar(positions - 0.2, normalized_cm.sum(axis=1), width=0.4, label='True Labels', color='b')
+            ax.bar(positions + 0.2, normalized_cm.sum(axis=0), width=0.4, label='Predicted Labels', color='r')
+            ax.set_xlabel('Class Label')
+            ax.set_ylabel('Normalized Frequency')
+            ax.set_title(f'Normalized True and Predicted Class Label Distribution ({name})')
+            ax.set_xticks(positions)
+            ax.set_xticklabels(labels)
+            ax.legend()
+            plt.tight_layout()
+            filename = f'normalized_class_label_distribution_{name}_test3_set.png'
+            filepath = os.path.join(save_dir, filename)
+            plt.savefig(filepath)
+            plt.close()
         print('test3')
 
         return accuracy
@@ -103,11 +197,13 @@ class ShiftAdapt:
         weights = {}
         accuracy = {}
         probability = {}
-        class_labels = val_y.unique()
+        class_labels = sorted(val_y.unique())
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
         del list_classifiers['d_strat']
+
+        confusion_matrices = {}
 
         for name, clf in list_classifiers.items():
             val_pred = clf.predict(val_x)
@@ -119,9 +215,19 @@ class ShiftAdapt:
             accuracy[name] = round(accuracy_score(test_y, new_test_pred), 2)
             probability[name] = new_test_prob
 
-        print('weights1')
-        print('accuracy1')
-        print('probability1')
+            confusion_matrices[name] = confusion_matrix(test_y, new_test_pred)
+
+        for name, matrix in confusion_matrices.items():
+            print(f"Confusion matrix for classifier {name}:")
+            print(matrix)
+        print("Distribution of predictions on test set 1:")
+        print("===========================================")
+        for name, acc in accuracy.items():
+            print(f"Classifier {name}: Accuracy = {acc}")
+        print("BBSC adaptation weights:")
+        print("========================")
+        for item, weight in weights.items():
+            print(f"Classifier {item}: Weight = {weight}")
 
         return weights, accuracy, probability
     
@@ -134,11 +240,13 @@ class ShiftAdapt:
         weights = {}
         accuracy = {}
         probability = {}
-        class_labels = val_y.unique()
+        class_labels = sorted(val_y.unique())
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
         del list_classifiers['d_strat']
+
+        confusion_matrices = {}
 
         for name, clf in list_classifiers.items():
             val_pred = clf.predict(val_x)
@@ -149,10 +257,19 @@ class ShiftAdapt:
             new_test_pred, new_test_prob = update_probs(class_labels, weight, test_pred, test_prob)
             accuracy[name] = round(accuracy_score(test_y, new_test_pred), 2)
             probability[name] = new_test_prob
-
-        print('weights2')
-        print('accuracy2')
-        print('probability2')
+            confusion_matrices[name] = confusion_matrix(test_y, new_test_pred)
+        
+        for name, matrix in confusion_matrices.items():
+            print(f"Confusion matrix for classifier {name}:")
+            print(matrix)
+        print("Distribution of predictions on test set 2:")
+        print("===========================================")
+        for name, acc in accuracy.items():
+            print(f"Classifier {name}: Accuracy = {acc}")
+        print("BBSC adaptation weights:")
+        print("========================")
+        for item, weight in weights.items():
+            print(f"Classifier {item}: Weight = {weight}")
 
         return weights, accuracy, probability
     
@@ -165,11 +282,12 @@ class ShiftAdapt:
         weights = {}
         accuracy = {}
         probability = {}
-        class_labels = val_y.unique()
+        class_labels = sorted(val_y.unique())
 
         list_classifiers = self.list_classifiers.copy()
         del list_classifiers['d_freq']
         del list_classifiers['d_strat']
+        confusion_matrices = {}
 
         for name, clf in list_classifiers.items():
             val_pred = clf.predict(val_x)
@@ -180,10 +298,48 @@ class ShiftAdapt:
             new_test_pred, new_test_prob = update_probs(class_labels, weight, test_pred, test_prob)
             accuracy[name] = round(accuracy_score(test_y, new_test_pred), 2)
             probability[name] = new_test_prob
+            confusion_matrices[name] = confusion_matrix(test_y, new_test_pred)
 
-        print('weights3')
-        print('accuracy3')
-        print('probability3')
+        for name, matrix in confusion_matrices.items():
+            print(f"Confusion matrix for classifier {name}:")
+            print(matrix)
+        print("Distribution of predictions on test set 3:")
+        print("===========================================")
+        for name, acc in accuracy.items():
+            print(f"Classifier {name}: Accuracy = {acc}")
+        print("BBSC adaptation weights:")
+        print("========================")
+        for item, weight in weights.items():
+            print(f"Classifier {item}: Weight = {weight}")
    
         return weights, accuracy, probability
+    
+    def plot_normalized_true_class_label_distribution_all_datasets(self):
+        save_dir = 'truth_distribution_graphs'
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+
+        class_labels = [1, 2, 3, 4]
+        datasets = {'valid': self.val_y, 'test1': self.test1_y, 'test2': self.test2_y, 'test3': self.test3_y}
+        dataset_counts = {}
+        for dataset_name, y in datasets.items():
+            dataset_counts[dataset_name] = [np.sum(y == label) / len(y) for label in class_labels]
+
+        fig, ax = plt.subplots(figsize=(10, 6))
+        width = 0.2
+        positions = np.arange(len(class_labels))
+
+        for i, (dataset_name, counts) in enumerate(dataset_counts.items()):
+            ax.bar(positions + (i - 1.5) * width, counts, width = width, label = dataset_name)
+        ax.set_xlabel('Class Label')
+        ax.set_ylabel('Normalized Frequency')
+        ax.set_title('Normalized True Class Label Distribution')
+        ax.set_xticks(positions)
+        ax.set_xticklabels(class_labels)
+        ax.legend()
+        plt.tight_layout()
+        filename = f'normalized_truth_label_distribution_set.png'
+        filepath = os.path.join(save_dir, filename)
+        plt.savefig(filepath)
+        plt.close()
 

@@ -45,6 +45,7 @@ def main():
     test1_acc = expt_instance.test1()
     test2_acc = expt_instance.test2()
     test3_acc = expt_instance.test3()
+    expt_instance.plot_normalized_true_class_label_distribution_all_datasets()
     weight1, accuracy1, probability1 = expt_instance.label_shift_1()
     weight2, accuracy2, probability2 = expt_instance.label_shift_2()
     weight3, accuracy3, probability3 = expt_instance.label_shift_3()
