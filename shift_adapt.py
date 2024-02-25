@@ -31,7 +31,7 @@ Parameters: train set, validation set, test set 1, test set 2, test set 3 (dataf
 -----------------------------------------------------------------------------------------------------------------------------------------
 Type: Function
 Name: train
-Purpose: Training all 6 models on the training set
+Purpose: Training all 6 models on the training set. Also prints out the feature importance required for extra credit
 Parameters: train set, random forest classifier, 3nn classifier, 9nn classifier, gaussian classifier, baseline classifier x2
 -----------------------------------------------------------------------------------------------------------------------------------------
 Type: Function
